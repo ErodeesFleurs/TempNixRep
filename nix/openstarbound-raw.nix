@@ -1,32 +1,35 @@
-{ steamSupport ? false
-, lib
-, stdenv
-, fetchFromGitHub
-, cmake
-, ninja
-, zlib
-, zstd
-, libpng
-, freetype
-, libvorbis
-, libopus
-, SDL2
-, glew
-, xorg
-, ...
+{
+  steamSupport ? false,
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  cmake,
+  ninja,
+  zlib,
+  zstd,
+  libpng,
+  freetype,
+  libvorbis,
+  libopus,
+  SDL2,
+  glew,
+  xorg,
+  ...
 }:
-let fs = lib.fileset; in
+let
+  fs = lib.fileset;
+in
 
-stdenv.mkDerivation rec{
+stdenv.mkDerivation rec {
   pname = "openstarbound-raw";
   version = "v3.1.3r1";
   src = fetchFromGitHub ({
-      owner = "OpenStarbound";
-      repo = "OpenStarbound";
-      rev = "a52c213";
-      fetchSubmodules = false;
-      sha256 = "sha256-EyJ8TVvSLsbUnHriosLCovaV3TzbdCdeSkmHH2emwV4=";
-    });
+    owner = "OpenStarbound";
+    repo = "OpenStarbound";
+    rev = "a52c213";
+    fetchSubmodules = false;
+    sha256 = "sha256-EyJ8TVvSLsbUnHriosLCovaV3TzbdCdeSkmHH2emwV4=";
+  });
 
   sourceRoot = "source/source";
 
@@ -64,11 +67,11 @@ stdenv.mkDerivation rec{
   ];
   postPatch = ''
     substituteInPlace CMakeLists.txt \
-        --replace "GLEW::glew_s" "GLEW::GLEW"
+        --replace-warn "GLEW::glew_s" "GLEW::GLEW"
     substituteInPlace CMakeLists.txt \
-        --replace "find_package(GLEW REQUIRED)" "find_package(GLEW CONFIG REQUIRED)"
+        --replace-warn "find_package(GLEW REQUIRED)" "find_package(GLEW CONFIG REQUIRED)"
     substituteInPlace CMakeLists.txt \
-        --replace "CMAKE_RUNTIME_OUTPUT_DIRECTORY" "NIX_STB_PLACEHOLDER"
+        --replace-warn "CMAKE_RUNTIME_OUTPUT_DIRECTORY" "NIX_STB_PLACEHOLDER"
   '';
 
   installPhase = ''
