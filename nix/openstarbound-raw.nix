@@ -22,11 +22,11 @@ in
 
 stdenv.mkDerivation rec {
   pname = "openstarbound-raw";
-  version = "v3.1.3r1";
+  version = "a52c213";
   src = fetchFromGitHub ({
     owner = "OpenStarbound";
     repo = "OpenStarbound";
-    rev = "a52c213";
+    rev = "main";
     fetchSubmodules = false;
     sha256 = "sha256-EyJ8TVvSLsbUnHriosLCovaV3TzbdCdeSkmHH2emwV4=";
   });
