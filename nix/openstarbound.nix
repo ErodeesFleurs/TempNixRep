@@ -42,7 +42,7 @@ writeShellApplication {
   derivationArgs.passthru = { inherit openstarbound-raw osbconfig; };
   text = ''
     mkdir -p "${mergedConfig.storageDirectory}"
-    osb-client \
+    starbound \
       -bootconfig ${osbconfig}
       "$@"
   '';

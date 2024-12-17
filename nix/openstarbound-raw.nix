@@ -84,5 +84,5 @@ stdenv.mkDerivation rec {
     ln -s "$out/linux/client" "$out/bin/client"
   '';
 
-  meta.mainProgram = "osb-client";
+  meta.mainProgram = "starbound";
 }

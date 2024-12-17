@@ -35,7 +35,7 @@ writeShellApplication {
     }
     EOF
 
-    osb-client \
+    starbound \
       -bootconfig "$tmp_cfg"
       "$@"
 
